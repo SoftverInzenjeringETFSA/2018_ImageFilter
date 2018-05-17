@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import { HomeScreen, ImageSelectionScreen, EditScreen, PostEditScreen, SaveImageScreen } from './Screens';
+import { HomeScreen, ImageSelectionScreen, EditScreen, PostEditScreen, SaveImageScreen,  ShareScreen } from './Screens';
 
 const RootStack = createStackNavigator(
     {
@@ -10,7 +10,9 @@ const RootStack = createStackNavigator(
         ImageSelection: { screen: ImageSelectionScreen },
         Edit: { screen: EditScreen },
         PostEdit: { screen: PostEditScreen }, 
-        SaveImage: {screen: SaveImageScreen}    },
+        SaveImage: {screen: SaveImageScreen},
+        Share: { screen: ShareScreen},
+    },
     {
         initialRouteName: 'Edit',
         headerMode: 'none',
