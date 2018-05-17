@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Linking } from 'react-native';
 
 export default class PostEditScreen extends React.Component {
     render() {
@@ -7,8 +7,8 @@ export default class PostEditScreen extends React.Component {
             <View style={styles.container}>
                 <Text>Post edit</Text>
                 <Button 
-                    title="Home"
-                    onPress={() => this.props.navigation.navigate('Home')}
+                    title="Share to instagram"
+                    onPress={() => Linking.openURL('instagram://share')}
                 />
                 <Button 
                     title="Save Image"
