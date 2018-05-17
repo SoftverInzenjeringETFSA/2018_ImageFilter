@@ -10,6 +10,10 @@ export default class PostEditScreen extends React.Component {
                     title="Home"
                     onPress={() => this.props.navigation.navigate('Home')}
                 />
+                <Button 
+                    title="Save Image"
+                    onPress={() => this.props.navigation.navigate('SaveImage')}
+                />
             </View>
         );
     }
