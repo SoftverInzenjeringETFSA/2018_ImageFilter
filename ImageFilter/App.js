@@ -12,7 +12,8 @@ const RootStack = createStackNavigator(
         PostEdit: { screen: PostEditScreen },
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Edit',
+        headerMode: 'none',
     }
 );
 
