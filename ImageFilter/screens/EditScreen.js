@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { Alert, StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import Overlay from 'react-native-modal-overlay';
 
 class TransparentMenu extends React.Component {
@@ -59,7 +59,7 @@ class TransparentMenu extends React.Component {
             return (
                 <View style={[this.cStyles.container]}>             
                     <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable}>
-                        <Text>Open</Text>
+                        <Text>Filters</Text>
                     </TouchableOpacity>
                     <Overlay visible={this.state.menuOpen} 
                         closeOnTouchOutside
@@ -92,7 +92,7 @@ class TransparentMenu extends React.Component {
         return (
             <View style={this.cStyles.container}>
                 <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable} ref={view => { this.mainButton = view }}>
-                    <Text>Open</Text>
+                    <Text>Filters</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -116,6 +116,14 @@ export default class EditScreen extends React.Component {
                         <Button title='Confirm' onPress={() => this.props.navigation.navigate('PostEdit')}/>
                     </View>
                 </View>
+                <TouchableHighlight  onPress={() => alert('Image clicked!')}> 
+                <View style={styles.container}>
+                <Image 
+                    source={require('../slika.jpg')}
+                    >
+                </Image>
+                </View>
+                </TouchableHighlight>
             </View>
         );
     }

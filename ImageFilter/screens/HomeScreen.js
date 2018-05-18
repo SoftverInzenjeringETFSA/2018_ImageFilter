@@ -7,7 +7,7 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
                 <Text>Home</Text>
                 <Button 
-                    title="Odaberi sliku"
+                    title="Choose an image"
                     onPress={() => this.props.navigation.navigate('ImageSelection')}
                 />
             </View>
