@@ -1,110 +1,41 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
-import Overlay from 'react-native-modal-overlay';
-
-class TransparentMenu extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            menuOpen: false,
-            dimensions: undefined,
-        };
-    }
-
-    onPress = () => {
-        if (!this.state.dimensions) {
-            this.mainButton.measureInWindow( (px, py, w, h) => {
-                this.setState(previousState => {
-                    return {
-                        menuOpen: !previousState.menuOpen,
-                        dimensions: {
-                            x: px,
-                            y: py,
-                            width: w,
-                            height: h,
-                        }
-                    }
-                });
-                console.log(this.state.dimensions);
-            });
-        } else {
-            this.setState(previousState => {
-                return {
-                    menuOpen: !previousState.menuOpen,
-                    dimensions: previousState.dimensions,
-                }
-            });
-        }        
-    }
-
-    cStyles = StyleSheet.create({
-        container: {
-            justifyContent: 'center',
-            alignContent: 'stretch',
-            alignSelf: 'stretch',
-            width: '50%',
-        },
-        touchable: {
-            height: 100,
-            width: '100%',
-            borderColor: 'white',
-            borderWidth: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-    });
-
-    render() {
-        if (this.state.dimensions) {
-            return (
-                <View style={[this.cStyles.container]}>             
-                    <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable}>
-                        <Text>Filters</Text>
-                    </TouchableOpacity>
-                    <Overlay visible={this.state.menuOpen} 
-                        closeOnTouchOutside
-                        animationType="zoomIn"
-                        containerStyle={{
-                            backgroundColor: 'rgba(0,0,0,0.1)'
-                        }}
-                        childrenWrapperStyle={{
-                            backgroundColor: 'rgba(0,0,0,0.2)',
-                            position: 'absolute', 
-                            left: this.state.dimensions.x,
-                            bottom: this.state.dimensions.height * 1.5,
-                            width: this.state.dimensions.width,
-                            padding: 0,
-                    }}>
-                        <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable}>
-                            <Text>Button3</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable}>
-                            <Text>Button2</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable}>
-                            <Text>Button1</Text>
-                        </TouchableOpacity>
-                    </Overlay>
-                </View>
-            );
-        }
-        
-        return (
-            <View style={this.cStyles.container}>
-                <TouchableOpacity onPress={this.onPress} style={this.cStyles.touchable} ref={view => { this.mainButton = view }}>
-                    <Text>Filters</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-};
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    Button, 
+    Image, 
+    TouchableOpacity, 
+    Dimensions
+} from 'react-native';
+import { FileSystem } from 'expo';
+import { TransparentMenu } from '../Components.js';
 
 export default class EditScreen extends React.Component {
+    onConfirm = async () => {
+        // await FileSystem.copyAsync({
+        //     from: 'data:image/jpeg;base64,' + this.props.navigation.getParam('base64'),
+        //     to: FileSystem.documentDirectory + 'image.jpg'
+        // });
+
+        /**
+         * OVDJE TREBA SPASAVATI SLIKU
+         */
+
+        this.props.navigation.navigate('Share', {
+            'uri': this.props.navigation.getParam('uri'),
+            'base64': this.props.navigation.getParam('base64')
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image source={require('../slika.jpg')}></Image>
+                    <Image source={{uri: this.props.navigation.getParam('uri')}} style={{ 
+                        width: Dimensions.get('window').width, 
+                        height: Dimensions.get('window').width // TODO: Pravilno racunanje dimenzija
+                    }}></Image>
                 </View>
                 <View style={styles.menuContainer}>
                     <View style={styles.upperMenu}>
@@ -113,17 +44,9 @@ export default class EditScreen extends React.Component {
                     </View>
                     <View style={styles.lowerMenu}>
                         <Button title='Undo' onPress={() => this.props.navigation.navigate('Home')} />
-                        <Button title='Confirm' onPress={() => this.props.navigation.navigate('PostEdit')}/>
+                        <Button title='Confirm' onPress={this.onConfirm}/>
                     </View>
                 </View>
-                <TouchableHighlight  onPress={() => alert('Image clicked!')}> 
-                <View style={styles.container}>
-                <Image 
-                    source={require('../slika.jpg')}
-                    >
-                </Image>
-                </View>
-                </TouchableHighlight>
             </View>
         );
     }

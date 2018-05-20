@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, Linking} from 'react-native';
-import{Button, SocialIcon} from 'react-native-elements';
+import { StyleSheet, View, Text, Linking, Share } from 'react-native';
+import { Button, SocialIcon } from 'react-native-elements';
 
 export default class ShareScreen extends React.Component {
     render() {
@@ -18,18 +18,18 @@ export default class ShareScreen extends React.Component {
                     title='Share With Facebook'
                     button
                     type='facebook'
-                    onPress={() => this.props.navigation.navigate('Home')}
+                    onPress={() => Linking.openURL('facebook://new')}
                 />
 
                 <Button raised
-                    title="Back To Editing"
+                    title='Done'
                     borderRadius={25}
                     backgroundColor={'#ff6666'}
                     containerViewStyle={{ alignSelf:'center',marginTop: 5, marginBottom: 5}}
                     buttonStyle={{width:325, height: 50}}
                     textStyle={{fontWeight:'bold'}}
-                    icon={{name: 'arrow-left', type: 'font-awesome'}}
-                    onPress={() => this.props.navigation.navigate('Edit')}
+                    // icon={{name: 'arrow-right', type: 'font-awesome'}}
+                    onPress={() => this.props.navigation.navigate('Home')}
                 />
             </View>
         
