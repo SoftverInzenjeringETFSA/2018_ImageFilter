@@ -6,18 +6,30 @@ import {
     Button, 
     Image, 
     TouchableOpacity, 
-    Dimensions
+    Dimensions,
+    CameraRoll
 } from 'react-native';
 import { FileSystem } from 'expo';
+import Expo  from 'expo';
 import { TransparentMenu } from '../Components.js';
 
 export default class EditScreen extends React.Component {
     onConfirm = async () => {
-        // await FileSystem.copyAsync({
-        //     from: 'data:image/jpeg;base64,' + this.props.navigation.getParam('base64'),
-        //     to: FileSystem.documentDirectory + 'image.jpg'
-        // });
-
+        const { status } = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
+        if(status === 'granted'){
+            CameraRoll.saveToCameraRoll(this.props.navigation.getParam('uri')).then(function(result) {
+                console.log('save succeeded ' + result);
+                alert(result);
+                }).catch(function(error) {
+                console.log('save failed ' + error);
+                alert(error);
+                });
+                console.log('FINISHED');
+            }
+         //await FileSystem.copyAsync({
+         //    from: this.props.navigation.getParam('uri'),
+         //    to: FileSystem.documentDirectory + 'image.jpg'
+        //}).catch(function(er){ console.log(er); });
         /**
          * OVDJE TREBA SPASAVATI SLIKU
          */
