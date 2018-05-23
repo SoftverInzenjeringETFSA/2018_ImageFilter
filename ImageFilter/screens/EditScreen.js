@@ -56,7 +56,7 @@ export default class EditScreen extends React.Component {
                     </View>
                     <View style={styles.lowerMenu}>
                         <Button title='Undo' onPress={() => this.props.navigation.navigate('Home')} />
-                        <Button title='Confirm' onPress={this.onConfirm}/>
+                        <Button title='Save' onPress={this.onConfirm}/>
                     </View>
                 </View>
             </View>
