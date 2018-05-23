@@ -9,7 +9,8 @@ import { createStackNavigator } from 'react-navigation';
 import { 
   HomeScreen, 
   EditScreen,
-  ShareScreen 
+  ShareScreen,
+  //HelpScreen
 } from './Screens';
 
 const RootStack = createStackNavigator(
@@ -17,6 +18,7 @@ const RootStack = createStackNavigator(
         Home: { screen: HomeScreen },
         Edit: { screen: EditScreen },
         Share: { screen: ShareScreen },
+        //Help: { screen: HelpScreen }
     },
     {
         initialRouteName: 'Home',

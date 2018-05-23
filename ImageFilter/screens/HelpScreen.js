@@ -1,0 +1,1 @@
+import helpcomponent from '../components/help/help-component.js';

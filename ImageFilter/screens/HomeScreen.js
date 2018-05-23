@@ -28,7 +28,16 @@ export default class HomeScreen extends React.Component {
                 <Text>Home</Text>
                 <Button 
                     title="Choose an image"
-                    onPress={this.chooseImage}
+                    onPress={this.chooseImage}/>
+                <Button raised
+                    title='Help'
+                    borderRadius={25}
+                    backgroundColor={'#ff6666'}
+                    containerViewStyle={{ alignSelf:'left',marginTop: 5, marginBottom: 5}}
+                    buttonStyle={{width:325, height: 50}}
+                    textStyle={{fontWeight:'bold'}}
+                    // icon={{name: 'arrow-right', type: 'font-awesome'}}
+                    onPress={() => this.props.navigation.navigate('Help')}
                 />
             </View>
         );
